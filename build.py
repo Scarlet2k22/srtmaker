@@ -5,18 +5,27 @@ import sys
 
 def build_windows():
     print("Building for Windows...")
-    subprocess.run(["pyinstaller", "--onefile", "--windowed", "--add-data", "icon.ico;.", "--icon=icon.ico", "--name=SRTMaker", "srtmaker.py"], check=True)
+    cmd = ["pyinstaller", "--onefile", "--windowed", "--name=SRTMaker", "srtmaker.py"]
+    if os.path.exists("icon.ico"):
+        cmd.extend(["--add-data", "icon.ico;.", "--icon=icon.ico"])
+    subprocess.run(cmd, check=True)
     print("Windows build completed. SRTMaker.exe is in the dist directory.")
 
 def build_mac():
     print("Building for Mac...")
-    subprocess.run(["pyinstaller", "--windowed", "--onefile", "--add-data", "icon.ico:.", "--icon=icon.ico", "--name=SRTMaker", "srtmaker.py"], check=True)
+    cmd = ["pyinstaller", "--windowed", "--onefile", "--name=SRTMaker", "srtmaker.py"]
+    if os.path.exists("icon.ico"):
+        cmd.extend(["--add-data", "icon.ico:.", "--icon=icon.ico"])
+    subprocess.run(cmd, check=True)
     os.rename("dist/SRTMaker.app", "SRTMaker.app")
     print("Mac build completed. SRTMaker.app is in the current directory.")
 
 def build_linux():
     print("Building for Linux...")
-    subprocess.run(["pyinstaller", "--onefile", "--add-data", "icon.ico:.", "--name=SRTMaker", "srtmaker.py"], check=True)
+    cmd = ["pyinstaller", "--onefile", "--name=SRTMaker", "srtmaker.py"]
+    if os.path.exists("icon.ico"):
+        cmd.extend(["--add-data", "icon.ico:."])
+    subprocess.run(cmd, check=True)
     print("Linux build completed. SRTMaker is in the dist directory.")
 
 def main():
