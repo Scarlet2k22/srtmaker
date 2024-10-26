@@ -1,0 +1,23 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!README.md
+!README_PL.md
+!srtmaker.py
+
+# Even if they are in subdirectories
+!*/
+
+# If the files to be tracked are in subdirectories
+!*/README.md
+!*/README_PL.md
+!*/srtmaker.py
+
+# Ignore all pycache directories
+__pycache__/
+
+# Ignore all .pyc files
+*.pyc
+

@@ -5,7 +5,7 @@
 import csv
 import os
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, simpledialog
 import re
 import sys
 
@@ -118,11 +118,33 @@ def select_file():
     file_path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
     return file_path
 
+def get_parameters():
+    root = tk.Tk()
+    root.withdraw()
+
+    params = {}
+    params['FRAME_RATE'] = simpledialog.askfloat("Input", "Enter frame rate (default 25):", initialvalue=FRAME_RATE)
+    params['MIN_DURATION'] = simpledialog.askfloat("Input", "Enter minimum subtitle duration in seconds (default 1.0):", initialvalue=MIN_DURATION)
+    params['MAX_DURATION'] = simpledialog.askfloat("Input", "Enter maximum subtitle duration in seconds (default 7.0):", initialvalue=MAX_DURATION)
+    params['CHARS_PER_LINE'] = simpledialog.askinteger("Input", "Enter maximum characters per line (default 42):", initialvalue=CHARS_PER_LINE)
+    params['READING_SPEED'] = simpledialog.askinteger("Input", "Enter reading speed in characters per second (default 20):", initialvalue=READING_SPEED)
+
+    return params
+
 def main():
     input_file = select_file()
     if not input_file:
         messagebox.showinfo("Information", "No file selected. Exiting.")
         return
+
+    params = get_parameters()
+    
+    global FRAME_RATE, MIN_DURATION, MAX_DURATION, CHARS_PER_LINE, READING_SPEED
+    FRAME_RATE = params['FRAME_RATE'] or FRAME_RATE
+    MIN_DURATION = params['MIN_DURATION'] or MIN_DURATION
+    MAX_DURATION = params['MAX_DURATION'] or MAX_DURATION
+    CHARS_PER_LINE = params['CHARS_PER_LINE'] or CHARS_PER_LINE
+    READING_SPEED = params['READING_SPEED'] or READING_SPEED
 
     output_folder = os.path.join(os.path.dirname(input_file), "converted")
     os.makedirs(output_folder, exist_ok=True)
