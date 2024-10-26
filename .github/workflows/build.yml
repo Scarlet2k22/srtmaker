@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build-windows:
     runs-on: windows-latest
@@ -42,7 +45,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: SRTMaker-Mac
-        path: SRTMaker.app
+        path: SRTMaker
 
   build-linux:
     runs-on: ubuntu-latest
@@ -88,17 +91,15 @@ jobs:
         asset_path: ./SRTMaker-Windows/SRTMaker.exe
         asset_name: SRTMaker-Windows.exe
         asset_content_type: application/octet-stream
-    - name: Zip Mac app
-      run: zip -r SRTMaker-Mac.zip SRTMaker-Mac
     - name: Upload Mac Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./SRTMaker-Mac.zip
-        asset_name: SRTMaker-Mac.zip
-        asset_content_type: application/zip
+        asset_path: ./SRTMaker-Mac/SRTMaker
+        asset_name: SRTMaker-Mac
+        asset_content_type: application/octet-stream
     - name: Upload Linux Release Asset
       uses: actions/upload-release-asset@v1
       env:
