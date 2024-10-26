@@ -13,18 +13,17 @@ def build_windows():
 
 def build_mac():
     print("Building for Mac...")
-    cmd = ["pyinstaller", "--windowed", "--onefile", "--name=SRTMaker", "srtmaker.py"]
-    if os.path.exists("icon.ico"):
-        cmd.extend(["--add-data", "icon.ico:.", "--icon=icon.ico"])
+    cmd = ["pyinstaller", "--onefile", "--name=SRTMaker", "srtmaker.py"]
     subprocess.run(cmd, check=True)
-    os.rename("dist/SRTMaker.app", "SRTMaker.app")
-    print("Mac build completed. SRTMaker.app is in the current directory.")
+    if os.path.exists("dist/SRTMaker"):
+        os.rename("dist/SRTMaker", "SRTMaker")
+        print("Mac build completed. SRTMaker is in the current directory.")
+    else:
+        print("Mac build completed, but the output file was not found in the expected location.")
 
 def build_linux():
     print("Building for Linux...")
     cmd = ["pyinstaller", "--onefile", "--name=SRTMaker", "srtmaker.py"]
-    if os.path.exists("icon.ico"):
-        cmd.extend(["--add-data", "icon.ico:."])
     subprocess.run(cmd, check=True)
     print("Linux build completed. SRTMaker is in the dist directory.")
 
