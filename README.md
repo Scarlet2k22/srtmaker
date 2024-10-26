@@ -30,8 +30,11 @@ CSV to SRT Subtitle Converter is a Python script that converts subtitles stored 
 ### 🔧 Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/YourUsername/CSV-to-SRT-Converter.git
-    cd CSV-to-SRT-Converter
+    1. Sklonuj repozytorium:
+    ```bash
+    git clone https://github.com/Scarlet2k22/srtmaker.git
+    cd srtmaker
+    ```
     ```
 2. Ensure you have Python 3.x and the required libraries installed.
 3. Run the script.
@@ -39,7 +42,7 @@ CSV to SRT Subtitle Converter is a Python script that converts subtitles stored 
 ### 🚀 How to Use
 1. Run the script using:
    ```bash
-   python script.py
+   python srtmaker.py
    ```
 2. Select the CSV file you wish to convert using the file selection dialog.
 3. The script will automatically convert the CSV file to SRT format and save it in the `converted` folder located in the same directory as the CSV file.
@@ -74,6 +77,31 @@ Here's an example of a CSV file and its SRT conversion:
   Another sample subtitle for the video.
   ```
 
+### ✨ Parameter Customization
+
+After selecting a CSV file for conversion, you can now customize key subtitle parameters such as frame rate, minimum and maximum subtitle durations, characters per line, and reading speed. These settings allow for precise control over the subtitle timing and display, ensuring optimal readability.
+
+### 🛠️ Building the Project
+
+To build the application for your operating system, run `build.py` with the desired target as an argument. This script will compile the code into a standalone executable for Windows, macOS, or Linux.
+
+#### Usage:
+- **Windows**:
+  ```bash
+  python build.py Windows
+  ```
+- **macOS**:
+  ```bash
+  python build.py Darwin
+  ```
+- **Linux**:
+  ```bash
+  python build.py Linux
+  ```
+
+By default, if no argument is provided, the script will detect and use the current operating system.
+
+The output files will be located in the `dist` directory.
 
 ### 💡 Notes
 - If your video file has a different frame rate, adjust the `FRAME_RATE` value to synchronize times accurately.

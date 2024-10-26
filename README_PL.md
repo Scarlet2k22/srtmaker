@@ -30,8 +30,8 @@ CSV to SRT Subtitle Converter to skrypt Python, który pozwala na konwersję nap
 ### 🔧 Instalacja
 1. Sklonuj repozytorium:
     ```bash
-    git clone https://github.com/TwojeUzytkownikow/CSV-to-SRT-Converter.git
-    cd CSV-to-SRT-Converter
+    git clone https://github.com/Scarlet2k22/srtmaker.git
+    cd srtmaker
     ```
 2. Upewnij się, że posiadasz Python 3.x i zainstalowane wymagane biblioteki.
 3. Uruchom skrypt.
@@ -39,7 +39,7 @@ CSV to SRT Subtitle Converter to skrypt Python, który pozwala na konwersję nap
 ### 🚀 Jak używać
 1. Uruchom skrypt za pomocą:
    ```bash
-   python script.py
+   python srtmaker.py
    ```
 2. Wybierz plik CSV, który chcesz przekonwertować, korzystając z interfejsu wyboru pliku.
 3. Skrypt automatycznie przekonwertuje plik CSV na format SRT i zapisze go w folderze `converted` znajdującym się w lokalizacji pliku CSV.
@@ -74,10 +74,36 @@ Oto, jak wygląda przykładowy plik CSV i jego konwersja na SRT:
   Drugi przykładowy napis do filmu.
   ```
 
+### ✨ Dostosowanie parametrów
+
+Po wybraniu pliku CSV do konwersji, możesz teraz dostosować kluczowe parametry napisów, takie jak liczba klatek na sekundę, minimalny i maksymalny czas trwania napisu, liczba znaków na linię oraz prędkość czytania. Te ustawienia pozwalają na precyzyjną kontrolę nad czasem wyświetlania i czytelnością napisów.
+
+### 🛠️ Budowanie projektu
+
+Aby zbudować aplikację dla swojego systemu operacyjnego, uruchom `build.py` z odpowiednim celem jako argumentem. Ten skrypt skompiluje kod do samodzielnego pliku wykonywalnego dla Windows, macOS lub Linux.
+
+#### Użycie:
+- **Windows**:
+  ```bash
+  python build.py Windows
+  ```
+- **macOS**:
+  ```bash
+  python build.py Darwin
+  ```
+- **Linux**:
+  ```bash
+  python build.py Linux
+  ```
+
+Domyślnie, jeśli nie podasz żadnego argumentu, skrypt wykryje i użyje aktualnego systemu operacyjnego.
+
+Pliki wyjściowe zostaną zapisane w katalogu `dist`.
 
 ### 💡 Uwagi
-- Jeśli Twój plik wideo ma inną liczbę klatek na sekundę, zmień wartość `FRAME_RATE`, aby uzyskać synchronizację czasów.
-- Używaj parametrów `MIN_DURATION` i `MAX_DURATION` w celu kontroli czasu wyświetlania napisów.
+- Jeśli Twój plik wideo ma inną liczbę klatek na sekundę, dostosuj wartość `FRAME_RATE`, aby dokładnie zsynchronizować czasy.
+- Użyj parametrów `MIN_DURATION` i `MAX_DURATION`, aby kontrolować czas wyświetlania napisów.
+
 
 ### 📜 Licencja
 Ten projekt jest objęty licencją Creative Commons Uznanie Autorstwa–Użycie Niekomercyjne 4.0 Międzynarodowa (CC BY-NC 4.0). Możesz używać, modyfikować i udostępniać kod do celów niekomercyjnych, pod warunkiem odpowiedniego uznania autorstwa. Szczegółowe informacje znajdziesz w [pełnej treści licencji](LICENSE).

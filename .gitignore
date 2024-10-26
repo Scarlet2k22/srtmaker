@@ -6,6 +6,12 @@
 !README.md
 !README_PL.md
 !srtmaker.py
+!build.py
+
+# Allow GitHub Actions workflow
+!.github/
+!.github/workflows/
+!.github/workflows/build.yml
 
 # Even if they are in subdirectories
 !*/
@@ -20,4 +26,3 @@ __pycache__/
 
 # Ignore all .pyc files
 *.pyc
-

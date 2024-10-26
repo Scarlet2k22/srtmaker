@@ -1,0 +1,110 @@
+name: Build SRTMaker
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        pip install pyinstaller
+    - name: Build Windows executable
+      run: python build.py Windows
+    - name: Upload Windows artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: SRTMaker-Windows
+        path: dist/SRTMaker.exe
+
+  build-mac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        pip install pyinstaller
+    - name: Build Mac app
+      run: python build.py Darwin
+    - name: Upload Mac artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: SRTMaker-Mac
+        path: SRTMaker.app
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        pip install pyinstaller
+    - name: Build Linux executable
+      run: python build.py Linux
+    - name: Upload Linux artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: SRTMaker-Linux
+        path: dist/SRTMaker
+
+  create-release:
+    needs: [build-windows, build-mac, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v2
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Upload Windows Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./SRTMaker-Windows/SRTMaker.exe
+        asset_name: SRTMaker-Windows.exe
+        asset_content_type: application/octet-stream
+    - name: Zip Mac app
+      run: zip -r SRTMaker-Mac.zip SRTMaker-Mac
+    - name: Upload Mac Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./SRTMaker-Mac.zip
+        asset_name: SRTMaker-Mac.zip
+        asset_content_type: application/zip
+    - name: Upload Linux Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./SRTMaker-Linux/SRTMaker
+        asset_name: SRTMaker-Linux
+        asset_content_type: application/octet-stream
