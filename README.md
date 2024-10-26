@@ -74,8 +74,6 @@ Here's an example of a CSV file and its SRT conversion:
   Another sample subtitle for the video.
   ```
 
-### 🖼️ Screenshots
-![CSV-to-SRT](link_to_screenshot.png) <!-- Add a screenshot showing the script in action -->
 
 ### 💡 Notes
 - If your video file has a different frame rate, adjust the `FRAME_RATE` value to synchronize times accurately.
