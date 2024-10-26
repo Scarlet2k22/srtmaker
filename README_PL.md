@@ -74,8 +74,6 @@ Oto, jak wygląda przykładowy plik CSV i jego konwersja na SRT:
   Drugi przykładowy napis do filmu.
   ```
 
-### 🖼️ Zrzuty ekranu
-![CSV-to-SRT](link_do_zrzutu.png) <!-- Dodaj zrzut ekranu pokazujący działanie skryptu -->
 
 ### 💡 Uwagi
 - Jeśli Twój plik wideo ma inną liczbę klatek na sekundę, zmień wartość `FRAME_RATE`, aby uzyskać synchronizację czasów.
