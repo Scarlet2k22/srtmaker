@@ -30,11 +30,8 @@ CSV to SRT Subtitle Converter is a Python script that converts subtitles stored 
 ### 🔧 Installation
 1. Clone the repository:
     ```bash
-    1. Sklonuj repozytorium:
-    ```bash
     git clone https://github.com/Scarlet2k22/srtmaker.git
     cd srtmaker
-    ```
     ```
 2. Ensure you have Python 3.x and the required libraries installed.
 3. Run the script.
